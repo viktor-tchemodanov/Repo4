@@ -59,15 +59,38 @@ namespace ConsoleApp1
             Console.WriteLine("\nTasks completed.\nFiles saved at " + GetDataDir());
             
         }
+        
+        // Tasks 5
+         private static void Task5_ReplaceTextOfBookmark()
+        {
+           // Programmatically open the document with a bookmark, replace the bookmarked text, and save the new document to disk.
+         Document doc = new Document(GetDataDir() + "Document_w_bookmark.doc");
+         
+        // Use the indexer of the Bookmarks collection to obtain the desired bookmark.
+         Bookmark bookmark = doc.Range.Bookmarks["Characteristics"];
 
-        [STAThread]
+        // Get the name and text of the bookmark.
+         string name = bookmark.Name;
+         string text = bookmark.Text;
+
+        // Set the name and text of the bookmark.
+        // bookmark.Name = "RenamedBookmark";
+        bookmark.Text = "This is the new bookmarked text.";
+            
+            // Save the new document to disk.
+            doc.Save(GetDataDir() + "Document_new_bookmark_out.doc");
+           
+        }
+    
+
+    [STAThread]
         public static void Main()
         {
             Task1_HelloWorldConsole();
             Task2_DocToPdf();
             Task3_HelloWorldAW();
             Task4_JoinTwoDocuments();
-            // TODO Task5_ReplaceTextOfBookmark();
+            Task5_ReplaceTextOfBookmark();
 
             Console.WriteLine("\n\nProgram Finished. Press any key to exit....");
             Console.ReadKey();
